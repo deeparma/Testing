@@ -1,0 +1,226 @@
+#%RAML 1.0
+title: Trial API
+version: 1.2.0
+protocols: 
+  - HTTP
+  - HTTPS
+uses: 
+  science-37-library:   exchange_modules/8db5810f-1022-47cc-856e-2156f651647f/science37-raml-library/1.0.11/libraries/science37-raml-library.raml 
+
+mediaType: application/json
+
+types:
+  siteDataType: !include data_types/site.raml
+  siteWithPaginationDataType: !include data_types/site-with-pagination.raml
+  trialDataType: !include data_types/trial.raml
+  trialWithPaginationDataType: !include data_types/trial-with-pagination.raml
+  successResponseDataType: !include data_types/response-success.raml
+  trialSettingDataType: !include data_types/setting.raml
+  trialStatusDataType: !include data_types/trial-status.raml
+  version: !include data_types/version.raml
+
+/platform/trials:
+  is: 
+  - science-37-library.client-credentials-required
+  - science-37-library.standard-error-responses
+  - science-37-library.multi-tenancy-required
+  get:
+    displayName: Retrieve Trials
+    description: Retrieves a list of all trials
+    is: 
+      - science-37-library.pagination
+    queryParameters:
+      filter[number]:
+        type: string
+        description: Filter by trial number
+        required: false
+        example: TR-000-111
+      filter[isActive]:
+        type: boolean
+        description: Filter by active/inactive
+        required: false
+        example: true
+      filter[partial]:
+        type: string
+        description: Partial search is across following columns which are visible to the user 
+          - number
+          - name
+        required: false
+        example: TR
+    responses:
+      200:
+        body:
+          type: trialWithPaginationDataType
+          examples: 
+            get-trials-example-response: !include examples/trial-multi.json
+  /version:
+    is:
+        - science-37-library.client-credentials-required
+        - science-37-library.standard-error-responses  
+    get:
+      displayName: Get version
+      description: get GIT's sha1
+      responses:
+        200:
+          body:
+            type: version
+            example: !include examples/version.json
+  /{trialId}:
+    is: 
+      - science-37-library.client-credentials-required
+    put:
+      displayName: Update A Trial
+      description: Updates a specific Trial using its UUIDs
+      body:
+        type: trialDataType
+        examples: 
+          put-trial-example-request: !include examples/trial-update.json
+      responses:
+        200:
+          body:
+            type: successResponseDataType
+            examples: 
+              put-trial-example-response: !include examples/response-success.json
+    get:
+      displayName: Get A Trial
+      description: Gets a specific Trial using its UUID
+      responses:
+        200:
+          body:
+            type: trialDataType
+            examples: 
+              get-trial-example-response: !include examples/trial-single.json
+    /status:
+      is: 
+        - science-37-library.client-credentials-required
+      get:
+        displayName: Get A Trial Status
+        description: Gets a trial status using its UUID
+        responses:
+          200:
+            body:
+              type: trialStatusDataType
+              examples:
+                status-sample: !include examples/trial-status.json
+          404:
+      put:
+        displayName: Update A Trial Status
+        description: Updates a trial status using its UUID
+        body:
+          type: trialStatusDataType
+          examples:
+            status-sample: !include examples/trial-status.json
+        responses:
+          200:
+            body:
+              type: successResponseDataType
+              examples: 
+                response-success: !include examples/response-success.json
+          400:
+          404:              
+    /settings:
+      is: 
+        - science-37-library.client-credentials-required
+      get:
+        displayName: Get Trial Setting
+        description: Gets the trial setting, including configuration & integration
+        responses:
+          200:
+            body:
+              type: trialSettingDataType
+              examples:
+                setting-default: !include examples/setting-default.json
+                setting-with-values: !include examples/setting-with-values.json
+          404:
+      put:
+        displayName: Update Trial Setting
+        description: Updates the trial setting, including configuration & integration
+        body:
+          type: trialSettingDataType
+          examples:
+            setting-with-values: !include examples/setting-with-values.json
+        responses:
+          200:
+            body:
+              type: successResponseDataType
+              examples: 
+                put-site-example-response: !include examples/response-success.json
+          404:
+          400:              
+    /sites:
+      is: 
+        - science-37-library.client-credentials-required
+      get:
+        displayName: Get Sites
+        description: Gets a list of sites within a trial
+        is: 
+          - science-37-library.pagination
+        queryParameters:
+          filter[number]:
+            type: string
+            description: Filter by site number
+            required: false
+            example: ST-000-111
+          filter[isActive]:
+            type: boolean
+            description: Filter by active/inactive
+            required: false
+            example: true
+        responses:
+          200:
+            body:
+              type: siteWithPaginationDataType
+              examples:
+                get-sites-example-response: !include examples/site-multi.json
+      post:
+        displayName: Create A Site
+        description: Creates a new site within a trial
+        body:
+          type: siteDataType
+          examples: 
+            post-site-example-request: !include examples/site-create.json
+        responses:
+          201:
+            body:     
+              type: successResponseDataType
+              examples: 
+                post-site-example-response: !include examples/response-success.json        
+    /sites/{siteId}:
+      is: 
+        - science-37-library.client-credentials-required
+      get:
+        displayName: Get A Site
+        description: Gets a specific site using its UUID within a trial
+        responses:
+          200:
+            body:
+              type: siteDataType
+              examples:
+                get-sites-example-response: !include examples/site-single.json
+      put:
+        displayName: Update A Site
+        description: Updates a specific site using its UUID within a trial
+        body:
+          type: siteDataType
+          examples: 
+            put-site-example-request: !include examples/site-update.json
+        responses:
+          200:
+            body:
+              type: successResponseDataType
+              examples: 
+                put-site-example-response: !include examples/response-success.json          
+  post:
+      displayName: Create A Trial
+      description: Creates a new trial
+      body:
+        type: trialDataType
+        examples: 
+          post-trial-example-request: !include examples/trial-create.json
+      responses:
+        201:
+          body:
+            type: successResponseDataType
+            examples: 
+              post-trial-example-response: !include examples/response-success.json
+  

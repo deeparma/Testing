@@ -1,0 +1,9 @@
+{
+  "healthy": true,
+  "uptime": "tbd",
+  "pom_version": "1.0.3",
+  "env": "dev2",
+  "git_dirty": true,
+  "git_branch": "NXL-2428-sha1-version-endpoint",
+  "git_commitSha": "3238d123811afe962b524836687e6a01759aee7a"
+}

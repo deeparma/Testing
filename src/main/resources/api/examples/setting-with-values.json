@@ -1,0 +1,20 @@
+{
+  "configuration": {
+    "photoCapture": false,
+    "hideTimeValues": false,
+    "selfConsent": true
+  },
+  "integration": {
+    "rave" : {
+      "isEnabled": true,
+      "data": {
+        "url": "www.example.com",
+        "username": "user",
+        "password": "pass",
+        "description": "Lorem ipsum dolor sit amet"
+      }
+    }
+  },
+  "startDate": "2020-01-01",
+  "endDate": "2050-01-01"
+}

@@ -1,0 +1,36 @@
+#%RAML 1.0 Library
+
+securitySchemes:
+  basic_authorization: !include ../security-schemes/basic_authorization.raml
+  oauth_2_0: !include ../security-schemes/oauth_2_0.raml
+
+traits:
+  accept-required: !include ../traits/accept-required.raml
+  client-credentials-required: !include ../traits/client-credentials-required.raml
+  client-id-required: !include ../traits/client-id-required.raml
+  content-type-required: !include ../traits/content-type-required.raml
+  pagination: !include ../traits/pagination.raml
+  standard-error-responses: !include ../traits/standard-error-responses.raml
+  uuid: !include ../traits/uuid.raml
+  created-updated: !include ../traits/created-updated.raml
+  multi-tenancy-required: !include ../traits/multi-tenancy-required.raml
+
+
+types:
+  Gender: 
+    type: string
+    enum:
+      - male
+      - female
+      - other
+      - unknown
+  StringNotEmpty:
+    type: string
+    minLength: 1
+  State:
+    type: string
+    minLength: 2
+    maxLength: 2
+  UUID:
+    type: string
+    pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$      

@@ -1,0 +1,40 @@
+#%RAML 1.0 DataType
+
+uses: 
+  int: setting-integration.raml
+
+properties:
+  configuration:
+    type: object
+    properties:
+      photoCapture:
+        type: boolean
+        displayName: Photo Capture Mobile App
+        description: Participants can use the device camera to take photos within the app
+        default: false
+      hideTimeValues:
+        type: boolean
+        displayName: Hide Time Values Mobile App
+        description: This will hide the amount of time lapsed for each task on the calendar
+        default: false
+      selfConsent:
+        type: boolean
+        displayName: Self Consent
+        description: Participants can complete consent forms without the need of a counter-signature
+        default: false
+  integration:
+    type: object
+    properties:
+      rave:
+        type: int.Rave | nil
+  startDate:
+    type: date-only | nil
+    displayName: Start Date
+    description: Trial start date in format YYYY-MM-DD
+    example: 2020-01-01
+  endDate:
+    type: date-only | nil
+    displayName: End Date
+    description: Trial end date in format YYYY-MM-DD
+    example: 2050-01-01
+

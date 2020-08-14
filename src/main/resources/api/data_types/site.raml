@@ -1,0 +1,56 @@
+#%RAML 1.0 DataType
+
+uses: 
+  lib: ../exchange_modules/8db5810f-1022-47cc-856e-2156f651647f/science37-raml-library/1.0.11/libraries/science37-raml-library.raml 
+
+properties:
+    id:
+      type: lib.UUID
+      required: false
+      description: Site UUID, only used in a "GET" response.
+    name:
+      type: lib.StringNotEmpty
+      description: Site name
+      example: Playa Vista
+    number:
+      type: lib.StringNotEmpty
+      description: Site number that is unique per tenant
+      example: HRS - SID - 222444
+    description:
+      type: lib.StringNotEmpty | nil
+      description: Trial description
+      example: |
+        This site is responsible for the domestic south west regions and is to access the short term safey and tolerability of water
+    isTest:
+      type: boolean
+      required: false
+      default: false
+      description: A flag to indicate if site is a test site. This can only be set once during a site creation and is ignored during an update.
+      example: false
+    isActive:
+      type: boolean
+      required: false
+      default: true
+      description: A flag to indicate if site is active or not
+      example: true
+    createdAt:
+      type: datetime
+      required: false
+      description: Created time, only used in GET calls
+      example: 2020-02-14T18:52:25.000Z
+    createdBy:
+      type: string
+      required: false
+      description: Created by, only used in GET calls
+      example: trial.admin@science37.com
+    updatedAt:
+      type: datetime
+      required: false
+      description: Updated time, only used in GET calls
+      example: 2020-02-14T18:52:25.000Z 
+    updatedBy: 
+      type: string
+      required: false
+      description: Updated by, only used in GET calls
+      example: trial.admin@science37.com  
+          

@@ -1,0 +1,15 @@
+{
+  "configuration": {
+    "photoCapture": false,
+    "hideTimeValues": false,
+    "selfConsent": false
+  },
+  "integration": {
+    "rave" : {
+      "isEnabled": false,
+      "data": null
+    }
+  },
+  "startDate": null,
+  "endDate": null
+}

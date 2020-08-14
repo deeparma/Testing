@@ -1,0 +1,68 @@
+#%RAML 1.0 DataType
+
+uses: 
+  lib: ../exchange_modules/8db5810f-1022-47cc-856e-2156f651647f/science37-raml-library/1.0.11/libraries/science37-raml-library.raml 
+  el: common-elements.raml
+
+properties:
+    id:
+      type: lib.UUID
+      required: false
+      description: Trial UUID, only used in a "GET" response.
+    name:
+      type: lib.StringNotEmpty
+      description: Trial name
+      example: Hydration Research Study
+    number:
+      type: lib.StringNotEmpty
+      description: Trial number that is unique per tenant
+      example: HRS - 222444
+    description:
+      type: lib.StringNotEmpty | nil
+      description: Trial description
+      example: |
+        The goal of this study is to assess the short term safety and tolerability of water in subjects with a history of mild to severe thirstiness to assess skin tone and mood
+    phase:
+      type: string
+      enum:
+        - I
+        - II
+        - III
+        - IV
+      description: Trial phase
+      example: II
+    studyLead:
+      type: lib.StringNotEmpty | nil
+      description: Study lead
+      required: false 
+      example: Chris Ceppi
+    status:
+      type: el.TrialStatus
+      description: Trial status
+      example: build
+    isActive:
+      type: boolean
+      required: false
+      default: true
+      description: A flag to indicate if trial is active or not
+      example: true
+    createdAt:
+      type: datetime
+      required: false
+      description: Created time, only used in GET calls
+      example: 2020-02-14T18:52:25.000Z
+    createdBy:
+      type: string
+      required: false
+      description: Created by, only used in GET calls
+      example: trial.admin@science37.com
+    updatedAt:
+      type: datetime
+      required: false
+      description: Updated time, only used in GET calls
+      example: 2020-02-14T18:52:25.000Z 
+    updatedBy: 
+      type: string
+      required: false
+      description: Updated by, only used in GET calls
+      example: trial.admin@science37.com

@@ -1,0 +1,14 @@
+#%RAML 1.0 Trait
+queryParameters:
+  start?:
+    description: Starting page number, first page is 1
+    type: integer
+    default: 1
+    example: 1
+  limit?:
+    description: Maximum number of entries per page
+    type: integer
+    default: 100
+    minimum: 1
+    maximum: 500    
+    example: 10

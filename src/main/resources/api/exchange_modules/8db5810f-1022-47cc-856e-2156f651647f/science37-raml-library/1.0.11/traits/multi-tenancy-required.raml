@@ -1,0 +1,16 @@
+#%RAML 1.0 Trait
+headers:
+  awsRole:
+    type: string
+    required: true
+    example: arn:aws:iam::125900505984:role/dev-catalog-dynamo-db-role
+  dbHost:
+    type: string
+    required: true
+    example: db-nora-dev.cti10lnrh4rb.us-west-2.rds.amazonaws.com
+  tenantId:
+    type: string
+    required: true
+    example: tenant-1
+      
+      

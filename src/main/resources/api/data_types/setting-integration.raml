@@ -1,0 +1,29 @@
+#%RAML 1.0 Library
+
+uses: 
+  lib: ../exchange_modules/8db5810f-1022-47cc-856e-2156f651647f/science37-raml-library/1.0.11/libraries/science37-raml-library.raml 
+
+types:
+  Rave: 
+    type: object
+    properties:
+      isEnabled:
+        type: boolean
+        example: false
+      data: RaveData | nil
+  RaveData:
+    type: object
+    properties:
+      url:
+        type: lib.StringNotEmpty
+        example: www.rave.com
+      username:
+        type: lib.StringNotEmpty
+        example: user@rave.com
+      password:
+        type: lib.StringNotEmpty
+        example: pass
+      description:
+        type: lib.StringNotEmpty
+        required: false
+        example: Lorem ipsum dolor sit amet

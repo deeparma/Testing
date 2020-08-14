@@ -1,0 +1,15 @@
+#%RAML 1.0 DataType
+
+uses: 
+  lib: ../exchange_modules/8db5810f-1022-47cc-856e-2156f651647f/science37-raml-library/1.0.11/libraries/science37-raml-library.raml 
+
+properties:
+  correlationId:
+    type: string
+    description: Correlation ID
+  timestamp:
+    type: integer
+    description: Response unix timestamp
+  id:
+    type: lib.UUID
+    description: UUID of the entity
